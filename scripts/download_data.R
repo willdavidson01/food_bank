@@ -13,12 +13,14 @@ resources <- list_package_resources("c6d64e9b-f85a-4084-be14-60cf18509203")
 datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))
 
 # load the first datastore resource as a sample
-data <- filter(datastore_resources, row_number()==1) %>% get_resource()
-data
+raw_data <- filter(datastore_resources, row_number()==1) %>% get_resource()
+raw_data
+
+path <- "inputs/data/"
 
 write_csv(
-  x = food_bank,
-  file = "food_bank.csv"
+  x = raw_data,
+  file = "raw_data.csv"
 )
 
 head(food_bank)
