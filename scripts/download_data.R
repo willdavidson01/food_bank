@@ -1,3 +1,4 @@
+#### Acquire ####
 library(opendatatoronto)
 library(dplyr)
 
@@ -14,3 +15,10 @@ datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'
 # load the first datastore resource as a sample
 data <- filter(datastore_resources, row_number()==1) %>% get_resource()
 data
+
+write_csv(
+  x = food_bank,
+  file = "food_bank.csv"
+)
+
+head(food_bank)
