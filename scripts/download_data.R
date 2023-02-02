@@ -18,9 +18,10 @@ raw_data
 
 path <- "inputs/data/"
 
+# Writing raw data onto a csv 
 write_csv(
   x = raw_data,
-  file = "raw_data.csv"
+  paste(path, file = "raw_data.csv", sep = '')
 )
 
-head(food_bank)
+head(raw_data)
