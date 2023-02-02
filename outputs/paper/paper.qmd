@@ -1,0 +1,34 @@
+---
+title: ""Rising Demand: "A Study on the Increasing Trend of Food Bank Usage"
+date: "2022-02-03"
+abstract: "This study aims to understand the factors contributing to the rising trend of food bank usage. Through a comprehensive review of the literature and data analysis, we investigate the economic, social, and political reasons behind the increasing demand for food banks. Our findings show that rising poverty and income inequality, as well as changes in government policies, are key factors contributing to the rise in food bank usage. This study sheds light on the current state of food insecurity and highlights the importance of addressing these underlying causes to alleviate food poverty. Our findings have implications for policymakers and practitioners in the fields of social welfare and hunger relief, and demonstrate the need for increased efforts to tackle food insecurity and poverty."
+author: "Will Davidson"
+format: pdf
+---
+
+## Introduction
+
+Introduction: "Food banks have played a crucial role in supporting communities affected by the COVID-19 pandemic. With widespread job losses and financial insecurity, many individuals and families have been struggling to put food on the table. As a result, food banks have seen a significant increase in demand for their services, with many reporting record numbers of people seeking assistance.
+
+The COVID-19 pandemic has highlighted the need for increased support for food banks and other emergency food programs. With supply chain disruptions, decreased volunteer availability, and higher demand, food banks have faced a range of challenges in their efforts to provide adequate support to those in need. Despite these challenges, food banks have been able to adapt and continue serving communities through a range of innovative approaches, such as expanding their partnerships, increasing online donations, and launching new programs.
+
+In light of the ongoing COVID-19 pandemic, it is important to continue supporting food banks and other emergency food programs. With unemployment rates still high and economic uncertainty continuing, the need for these organizations remains as critical as ever. By coming together as a community, we can help ensure that everyone has access to the food they need to stay healthy and nourished during these challenging times."
+
+## Data
+
+
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
