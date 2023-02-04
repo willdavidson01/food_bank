@@ -1,23 +1,28 @@
 ---
 title: "Rising Demand A Study on the Increasing Trend of Food Bank Usage"
+thanks: code and data are available at https://github.com/willdavidson01/food_bank
 date: "02/03/2023"
 author: "Will Davidson"
 format: pdf
+bibliography: references.bib
 ---
 
+                                        Abstract                  
 
 
-                                  Abstract                  
-                     
-"This study aims to understand the factors contributing to the rising trend of food bank usage. Through a comprehensive review of the literature and data analysis, we investigate the economic, social, and political reasons behind the increasing demand for food banks. Our findings show that rising poverty and income inequality, as well as changes in government policies, are key factors contributing to the rise in food bank usage. This study sheds light on the current state of food insecurity and highlights the importance of addressing these underlying causes to alleviate food poverty. Our findings have implications for policymakers and practitioners in the fields of social welfare and hunger relief, and demonstrate the need for increased efforts to tackle food insecurity and poverty."
+Cities have an obligation to maintain their infrastructure, programs and support to their citizens in good times and in challenging times. During the peak of the Covid-19 pandemic, we saw first hand the governments struggle to care for societies most vulnerable populations - the elderly, sick, homeless, and people and families living in poverty. This report highlights how two critical servics; basic shelter and food security, were impacted. As I examined the data from the Open Data Portal of the City of Toronto, there was already evidence of pre-pandemic rising trends in food bank and shelter usage, followed by the dramatic increases from 2020-2022 as a result of the pandemic. These findings show the vulnerability and risk the city faces in maintaining or increasing the needs of citizens when faced with a complex disruption to its social service support structures and raises questions about how cities need to begin to focus on upstream root cause solutions instead of fumbling to respond to growing trends in essential services.
 
-                                  Introduction
+                                       Introduction
 
-"Food banks have played a crucial role in supporting communities affected by the COVID-19 pandemic. With widespread job losses and financial insecurity, many individuals and families have been struggling to put food on the table. As a result, food banks have seen a significant increase in demand for their services, with many reporting record numbers of people seeking assistance.
+Toronto's dashboard data shows us trends on important topics surrounding the City of Toronto. The categories are split up into community vulnerability, crime, development & construction, economy, revenue, and services. My paper will look at community vulnerability focusing on overnight shelter use of individuals and food bank usage. 
 
-The COVID-19 pandemic has highlighted the need for increased support for food banks and other emergency food programs. With supply chain disruptions, decreased volunteer availability, and higher demand, food banks have faced a range of challenges in their efforts to provide adequate support to those in need. Despite these challenges, food banks have been able to adapt and continue serving communities through a range of innovative approaches, such as expanding their partnerships, increasing online donations, and launching new programs.
+Food banks and shetlers have always played a crucial role in supporting vulnerable individuals and communities, and this was especially true during the COVID-19 pandemic. With widespread job losses and financial insecurity, many individuals and families struggled to provide the basics for themselves and families. As a result, food banks and other emergency food programs have experienced a significant increase in demand for their services, with many locations reporting record numbers of people seeking assistance.
 
-In light of the ongoing COVID-19 pandemic, it is important to continue supporting food banks and other emergency food programs. With unemployment rates still high and economic uncertainty continuing, the need for these organizations remains as critical as ever. By coming together as a community, we can help ensure that everyone has access to the food they need to stay healthy and nourished during these challenging times."
+Data shows that the use of overnight shelters have also been increasing steadily over the years and during the height of the pandemic, when mandated closures of public spaces and public health isolation requirement left those withuout homes few options. 
+
+Each data set on it's own tells a story about demand and supply but when considering these data sets together, and the fact that they follow the same trends, is a wake up call for our city representatives that our social service systems are at a critical juncture.  
+
+
 
 ```{r, include=FALSE}
 #### Preamble ####
@@ -32,6 +37,8 @@ library(janitor)
 library(lubridate)
 library(opendatatoronto)
 library(tidyverse)
+
+#### Simulation ####
 
 #### Acquire ####
 raw_data <-
@@ -64,6 +71,16 @@ write_csv(
 
 head(cleaned_data)
 
+#Super Super Cleaned Data
+super_super_cleaned_data <-
+  clean_names(raw_data) |>
+  slice(8573:8604)
+
+write_csv(
+  x = super_super_cleaned_data,
+  file = "super_super_cleaned_data"
+)
+
 # Super Cleaned 
 super_cleaned_data <-
 clean_names(cleaned_data) |>
@@ -75,17 +92,27 @@ file = "super_cleaned_data.csv"
 )
 
 head(super_cleaned_data)
+
+#### House Data ####
+house_data <-
+  clean_names(raw_data) |>
+  slice(1798:1893)
+
+write_csv(
+  x = house_data,
+  file = "house_data"
+)
 ```
 
-```{r}
-#| echo: FALSE
-# Graph 
-ggplot(data = cleaned_data,
-       mapping = aes(x = year,
-                     y = measure_value))+
-  geom_point()+
-  labs(title = 'Food bank usage from 2015 to 2022') 
+2. Data
 
+2.1 Food bank usage quarterly in Toronto from 2015 to 2022
+
+Looking into food bank usage I obtained the data set Toronto progress portal - Key metrics from opendatatoronto. The portal has many different metrics from Toronto's economy to the communities vunreability. I focused on food banks because I volunterred at one throughout COVID and saw first hand the Torontoians who struggled for basic necessities. The dataset provided the quarterly usage of food banks in the city of Toronto from 2007 to 2022. I cleaned the data to go from 2015 to make the graph easy to read and relevant to COVID-19. One bias of this dataset is we're not sure which food bank locations are being reported and if certain food banks were left out due to not providing data. Another bias is around Christmas time more people use food banks leading to higher numbers in the fourth quarter. I had no way to clean the data to avoid this bias. 
+
+The dataset contains 9340 observations and 17 variables with varying information. This report focuses on food bank usage, year, and measure of value.
+
+```{r, echo = FALSE}
 # Table 
 super_cleaned_data |>
   group_by(year) |>
@@ -93,86 +120,62 @@ super_cleaned_data |>
   knitr::kable(caption ="December food bank usage")
 ```
 
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                           References
-                        
-@Manual{citeR,
-  title = {R: A Language and Environment for Statistical Computing},
-  author = {{R Core Team}},
-  organization = {R Foundation for Statistical Computing},
-  address = {Vienna, Austria},
-  year = {2020},
-  url = {https://www.R-project.org/},
-}
-
-@Manual{janitor,
-  title = {janitor: Simple Tools for Examining and Cleaning Dirty Data},
-  author = {Sam Firke},
-  year = {2021},
-  note = {R package version 2.1.0},
-  url = {https://CRAN.R-project.org/package=janitor},
-}
-
-@Manual{scales,
-  title = {scales: Scale Functions for Visualization},
-  author = {Hadley Wickham and Dana Seidel},
-  year = {2022},
-  note = {R package version 1.2.1},
-  url = {https://CRAN.R-project.org/package=scales},
-}
-
-@Manual{opendatatoronto,
-  title = {opendatatoronto: Access the City of Toronto Open Data Portal},
-  author = {Sharla Gelfand},
-  year = {2022},
-  note = {R package version 0.1.5},
-  url = {https://CRAN.R-project.org/package=opendatatoronto},
-}
-
-@Article{tidyverse,
-  title = {Welcome to the {tidyverse}},
-  author = {Hadley Wickham and Mara Averick and Jennifer Bryan and Winston Chang and Lucy D'Agostino McGowan and Romain François and Garrett Grolemund and Alex Hayes and Lionel Henry and Jim Hester and Max Kuhn and Thomas Lin Pedersen and Evan Miller and Stephan Milton Bache and Kirill Müller and Jeroen Ooms and David Robinson and Dana Paige Seidel and Vitalie Spinu and Kohske Takahashi and Davis Vaughan and Claus Wilke and Kara Woo and Hiroaki Yutani},
-    year = {2019},
-    journal = {Journal of Open Source Software},
-    volume = {4},
-    number = {43},
-    pages = {1686},
-    doi = {10.21105/joss.01686},
-  }
-  
-@Manual{knitr,
-  title = {knitr: A General-Purpose Package for Dynamic Report Generation in R},
-  author = {Yihui Xie},
-  year = {2022},
-  note = {R package version 1.41},
-  url = {https://yihui.org/knitr/},
-}
-  
-@Article{thereferencecanbewhatever,
-    title = {Welcome to the {tidyverse}},
-    author = {Hadley Wickham and Mara Averick and Jennifer Bryan and Winston Chang and Lucy D'Agostino McGowan and Romain François and Garrett Grolemund and Alex Hayes and Lionel Henry and Jim Hester and Max Kuhn and Thomas Lin Pedersen and Evan Miller and Stephan Milton Bache and Kirill Müller and Jeroen Ooms and David Robinson and Dana Paige Seidel and Vitalie Spinu and Kohske Takahashi and Davis Vaughan and Claus Wilke and Kara Woo and Hiroaki Yutani},
-year = {2019},
-journal = {Journal of Open Source Software},
-volume = {4},
-number = {43},
-pages = {1686},
-doi = {10.21105/joss.01686},
-}  
+Table 1 is shown below. Table 1 shows the amount of citizens who used the food banks in December from 2015 to 2022. The variable year indicates the year the food bank was used and measure_value indicates the amount of people who visited that month. 
 
 
-@Manual{citeLahman,
-  title = {Lahman: Sean `Lahman' Baseball Database},
-    author = {Michael Friendly and Chris Dalzell and Martin Monkman and Dennis Murphy},
-    year = {2020},
-    note = {R package version 8.0-0},
-    url = {https://CRAN.R-project.org/package=Lahman},
-  } 
+I'm interested in finding the upward increase of food banks from 2015 to 2022 to show how these vunreable communities aren't being supported even though it's becoming a serious issue. 
+
+Figure 1 shows the increase of food bank usage from 2015 to 2022 using quarterly reports for each year. The number has increased over the years showing the City of Toronto isn't doing there job supporting vulnreable communities. 
+
+```{r, echo = FALSE, warning = FALSE}
+# Figure 1
+ggplot(data = cleaned_data,
+       mapping = aes(x = year,
+                     y = measure_value,
+                     colour = period_number_in_year))+
+  geom_point(size = 3, alpha = 0.5)+
+  geom_smooth(formula = y~x, method = lm, se = F)+
+  facet_wrap(~category)+
+  labs(title = 'Figure 1: Food bank usage from 2015 to 2022')
+```
+
+2.2 Overnight Shelter Usage
+
+The number of individuals who used an overnight shelter from 2007 to 2022 is obtained from "Toronto's Dashboard Key Indicators" in the Toronto Open Data Portal (Gelfand 2020). There was a steady increase until 2019 where the numbers skyrocketed. 2022 is the highest the use has ever been in the past seven years. 
+
+```{r, echo = FALSE}
+#### Figure 2 ####
+ggplot(data = super_super_cleaned_data,
+       mapping = aes(x = year,
+                     y = measure_value))+
+  geom_point()+
+  labs(title = "Figure 2: Single shelter overnight use from 2015 to 2022")+
+    theme_bw()
+```
+
+Figure 2 shows the average individuals per night at overnight shelter services in Toronto from 2015 to 2022. The numbers shown per year are taken for every quarter for seven years. The data was steady from 2015 to 2018 with a slight increase. In 2019, the number of individuals rose and since then has escalated to disturbing trends in 2022.
+
+Figure 3 shows the average home price in the City of Toronto from 2015 to 2022. The averages are taken on a quarterly basis yearly.
+
+```{r, echo = FALSE}
+#### Figure 3 ####
+ggplot(data = house_data,
+       mapping = aes(x = year,
+                     y = measure_value))+
+  geom_point()+
+  labs(title = "Figure 3: Average home price in the City of Toronto")+
+  geom_smooth(formula = y~x, method = lm, se = F)+
+    theme_bw()
+```
+
+
+Figure 2 and 3 both show the vulnerable communities and how their situations are getting worse. The City of Toronto needs to integrate policies and take an upstream approach to solving these problems. By recognizing that these consistent trends can't be sustained and that investment is needed is the key. The upstream solutions include target programs, affordable housing and meaningful employment with a living wage. 
+
+
+
+
+
+References 
+                               
+[@citeR], [@janitor], [@opendatatoronto], [@tidyverse], [@knitr]
+ 
