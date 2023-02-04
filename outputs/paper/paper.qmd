@@ -34,7 +34,6 @@ Each data set on it's own tells a story about demand and supply but when conside
 
 library(knitr)
 library(janitor)
-library(lubridate)
 library(opendatatoronto)
 library(tidyverse)
 
@@ -110,7 +109,10 @@ write_csv(
 
 Looking into food bank usage I obtained the data set Toronto progress portal - Key metrics from opendatatoronto (Gelfand 2020). The portal has many different metrics from Toronto's economy to the communities vunreability. I focused on food banks because I volunterred at one throughout COVID and saw first hand the Torontoians who struggled for basic necessities. The dataset provided the quarterly usage of food banks in the city of Toronto from 2007 to 2022. I cleaned the data to go from 2015 to make the graph easy to read and relevant to COVID-19. One bias of this dataset is we're not sure which food bank locations are being reported and if certain food banks were left out due to not providing data. Another bias is around Christmas time more people use food banks leading to higher numbers in the fourth quarter. I had no way to clean the data to avoid this bias. 
 
-The dataset contains 9340 observations and 17 variables with varying information. This report focuses on food bank usage, year, and measure of value.
+
+
+The dataset contains 9340 observations and 17 variables with varying information. This report focuses on food bank usage, year, and measure of value. This report focuses on four of these variables which are: year, accident location, district, and fatality.
+By using R [@citeR], and R packages tidyverse [@tidyverse], “janitor” [@janitor], and knitr [@janitor], and opendatatoronto [@opendatatoronto] an extract of the cleaned dataset (Table 1) is shown below.
 
 ```{r, echo = FALSE}
 # Table 
@@ -171,11 +173,5 @@ ggplot(data = house_data,
 
 Figure 2 and 3 both show the vulnerable communities and how their situations are getting worse. The City of Toronto needs to integrate policies and take an upstream approach to solving these problems. By recognizing that these consistent trends can't be sustained and that investment is needed is the key. The upstream solutions include target programs, affordable housing and meaningful employment with a living wage. 
 
+References
 
-
-
-
-References 
-                               
-[@citeR], [@janitor], [@opendatatoronto], [@tidyverse], [@knitr]
- 
